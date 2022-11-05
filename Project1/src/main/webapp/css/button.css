@@ -1,0 +1,19 @@
+.button {
+    width: 150px;
+    text-align: center;
+    color: darkblue;
+}
+
+.button:hover {
+    width: 150px;
+    text-align: center;
+    background-color: darkblue;
+    color: azure;
+}
+
+.button:active {
+    width: 150px;
+    text-align: center;
+    background-color: darkred;
+    color: azure;
+}
