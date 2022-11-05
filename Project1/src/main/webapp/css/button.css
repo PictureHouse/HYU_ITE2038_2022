@@ -1,9 +1,11 @@
+/*평상시 버튼 디자인*/
 .button {
     width: 150px;
     text-align: center;
     color: darkblue;
 }
 
+/*커서를 버튼 위로 가져갔을 때의 버튼 상태 디자인*/
 .button:hover {
     width: 150px;
     text-align: center;
@@ -11,9 +13,10 @@
     color: azure;
 }
 
+/*버튼을 클릭했을 때의 버튼 상태 디자인*/
 .button:active {
     width: 150px;
     text-align: center;
-    background-color: darkred;
+    background-color: dodgerblue;
     color: azure;
 }

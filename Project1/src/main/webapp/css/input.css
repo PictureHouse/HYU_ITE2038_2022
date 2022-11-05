@@ -1,0 +1,5 @@
+/*텍스트 입력창의 기본 디자인*/
+.form-control {
+    color: darkblue;
+    text-align: center;
+}

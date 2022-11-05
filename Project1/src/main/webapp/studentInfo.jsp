@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>학생 수강 편람</title>
+    <title>학생 사용자 정보</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
         a {

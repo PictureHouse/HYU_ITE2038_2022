@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>학생 수강 편람</title>
+    <title>관리자 사용자 정보</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
         a {
@@ -28,15 +28,16 @@
 <header>
     <div>
         <div style="text-align: center">
-            <img src="images/HYU_hyu.png" onclick="location.href='studentMain.jsp'" alt="한양대학교 로고" style="height: 50px">
+            <img src="images/HYU_hyu.png" onclick="location.href='adminMain.jsp'" alt="한양대학교 로고" style="height: 50px">
         </div>
         <nav>
             <ul id="top-menu">
-                <li><a href="studentMain.jsp">수강 편람</a></li>
-                <li><a href="#">희망 수업 목록</a></li>
-                <li><a href="#">수강 신청 과목</a></li>
-                <li><a href="#">수업시간표</a></li>
-                <li><a href="studentInfo.jsp">사용자 정보</a></li>
+                <li><a href="adminMain.jsp">수강 편람</a></li>
+                <li><a href="#">수강 개설 및 삭제</a></li>
+                <li><a href="#">학생 조회 및 변경</a></li>
+                <li><a href="#">과목 조회 및 변경</a></li>
+                <li><a href="#">통계 기능(OLAP)</a></li>
+                <li><a href="adminInfo.jsp">사용자 정보</a></li>
                 <li><a href="#">로그아웃</a></li>
             </ul>
         </nav>
