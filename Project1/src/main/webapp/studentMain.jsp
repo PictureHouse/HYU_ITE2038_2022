@@ -32,12 +32,12 @@
         </div>
         <nav>
             <ul id="top-menu">
-                <li><a href="studentMain.jsp">수강 편람</a></li>
+                <li><a href="studentMain.jsp" style="color: dodgerblue">수강 편람</a></li>
                 <li><a href="#">희망 수업 목록</a></li>
                 <li><a href="#">수강 신청 과목</a></li>
                 <li><a href="#">수업시간표</a></li>
                 <li><a href="studentInfo.jsp">사용자 정보</a></li>
-                <li><a href="#">로그아웃</a></li>
+                <li><a href="logoutAction.jsp">로그아웃</a></li>
             </ul>
         </nav>
     </div>

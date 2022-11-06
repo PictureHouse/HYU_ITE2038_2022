@@ -37,8 +37,8 @@
                 <li><a href="#">학생 조회 및 변경</a></li>
                 <li><a href="#">과목 조회 및 변경</a></li>
                 <li><a href="#">통계 기능(OLAP)</a></li>
-                <li><a href="adminInfo.jsp">사용자 정보</a></li>
-                <li><a href="#">로그아웃</a></li>
+                <li><a href="adminInfo.jsp" style="color: dodgerblue">사용자 정보</a></li>
+                <li><a href="logoutAction.jsp">로그아웃</a></li>
             </ul>
         </nav>
     </div>
