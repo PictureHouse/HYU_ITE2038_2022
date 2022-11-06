@@ -1,7 +1,12 @@
+<%@ page import="Project1.ClassList" %>
+<%@ page import="Project1.Course" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>관리자-수강 편람</title>
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/input.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
         a {
@@ -23,6 +28,22 @@
             margin-left: 20px;
             margin-right: 20px;
         }
+        .frame {
+            font-family: 'Jua', sans-serif;
+            border: 1px solid darkblue;
+            text-align: center;
+            margin-left: 200px;
+            margin-right: 200px;
+            padding: 20px;
+        }
+        table {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        th, td {
+            padding: 5px;
+        }
     </style>
 </head>
 <header>
@@ -43,8 +64,96 @@
     </div>
 </header>
 <body>
-    <div style="text-align: center">
-        <img src="images/error.jpg" alt="서비스 불가" style="width: 70%">
+    <div class="frame">
+        <table>
+            <tr>
+                <td><h3 style="display: inline; color: darkblue; margin: 70px">수업번호로 강의 검색</h3></td>
+                <td>
+                    <form style="display: inline; margin-right: 50px"; method="post"; action="studentMain.jsp">
+                        <input type="text" class="form-control" placeholder="수업번호 전체입력" name="classID" maxlength="20">
+                        <input type="submit" class="button" value="검색">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td><h3 style="display: inline; color: darkblue; margin: 70px">학수번호로 강의 검색</h3></td>
+                <td>
+                    <form style="display: inline; margin-right: 50px"; method="post"; action="studentMain.jsp">
+                        <input type="text" class="form-control" placeholder="학수번호 전체입력" name="courseID" maxlength="20">
+                        <input type="submit" class="button" value="검색">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td><h3 style="display: inline; color: darkblue; margin: 70px">교과목명으로 강의 검색</h3></td>
+                <td>
+                    <form style="display: inline; margin-right: 50px"; method="post"; action="studentMain.jsp">
+                        <input type="text" class="form-control" placeholder="키워드 입력 가능" name="className" maxlength="20">
+                        <input type="submit" class="button" value="검색">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="frame">
+        <div class="row">
+            <table>
+                <thead>
+                <tr>
+                    <th>희망수업</th>
+                    <th>수강신청</th>
+                    <th>수업번호</th>
+                    <th>학수번호</th>
+                    <th>교과목명</th>
+                    <th>교강사명</th>
+                    <th>시작시간</th>
+                    <th>종료시간</th>
+                    <th>수강정원</th>
+                    <th>강의동</th>
+                    <th>강의실</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    try {
+                        ClassList classList = new ClassList();
+                        ArrayList<Course> list;
+                        if (request.getParameter("classID") != null) {
+                            int param1 = Integer.valueOf(request.getParameter("classID"));
+                            list = classList.search1(param1);
+                        } else if (request.getParameter("courseID") != null) {
+                            String param2 = request.getParameter("courseID");
+                            list = classList.search2(param2);
+                        } else if (request.getParameter("className") != null) {
+                            String param3 = request.getParameter("className");
+                            list = classList.search3(param3);
+                        } else {
+                            list = classList.search2("");
+                        }
+                        for(int i = 0; i < list.size(); i++) {
+                %>
+                <tr>
+                    <td><input type="submit" class="button" value="추가"></td>
+                    <td><input type="submit" class="button" value="신청"></td>
+                    <td><%= list.get(i).getClassID()%></td>
+                    <td><%= list.get(i).getCourseID()%></td>
+                    <td><%= list.get(i).getName()%></td>
+                    <td><%= list.get(i).getLecturerName()%></td>
+                    <td><%= list.get(i).getBegin()%></td>
+                    <td><%= list.get(i).getEnd()%></td>
+                    <td><%= list.get(i).getMaxPerson()%></td>
+                    <td><%= list.get(i).getBuilding()%></td>
+                    <td><%= list.get(i).getRoom()%></td>
+                </tr>
+                <%
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                %>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 <footer style="position : fixed; bottom: 0; width: 100%">
