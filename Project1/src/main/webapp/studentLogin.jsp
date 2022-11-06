@@ -17,7 +17,7 @@
         <form method="post" action="studentLoginAction.jsp">
             <img src="images/HYU_main.png" width="360px" style="margin: 20px;" alt="한양대학교 로고" onclick="location.href='index.jsp'">
             <h1 style="color: darkblue; margin: 20px; font-family: 'Jua', sans-serif">학생 로그인</h1>
-            <div class="">
+            <div>
                 <div >
                     <input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
                 </div>

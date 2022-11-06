@@ -6,11 +6,11 @@
     <title>로그아웃 액션</title>
 </head>
 <body>
-<%
-    session.invalidate();
-%>
-<script>
-    location.href = 'index.jsp';
-</script>
+    <%
+        session.invalidate();
+    %>
+    <script>
+        location.href = 'index.jsp';
+    </script>
 </body>
 </html>

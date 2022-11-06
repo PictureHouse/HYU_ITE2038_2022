@@ -4,7 +4,6 @@ public class User {
     private String UserID;
     private String UserPassword;
     private String UserName;
-    private String UserGender;
 
     public String getUserID() {
         return UserID;
@@ -28,13 +27,5 @@ public class User {
 
     public void setUserName(String userName) {
         UserName = userName;
-    }
-
-    public String getUserGender() {
-        return UserGender;
-    }
-
-    public void setUserGender(String userGender) {
-        UserGender = userGender;
     }
 }

@@ -6,13 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class AdminDAO {
+public class ClassList {
 
     private Connection conn;
     private PreparedStatement pstmt;
     private ResultSet rs;
 
-    public AdminDAO() {
+    public ClassList() {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/DB2019030400?serverTimezone=Asia/Seoul";
             String dbID = "root";
@@ -28,8 +28,8 @@ public class AdminDAO {
         String test = userID + " " + userPassword;
         return test;
     }
-
-    public int login(String userID, String userPassword) {
+/*
+    public int search(String classID, String userPassword) {
         String SQL = "SELECT password FROM admin WHERE admin_id = ?";
         try {
             pstmt = conn.prepareStatement(SQL);
@@ -48,25 +48,25 @@ public class AdminDAO {
         }
         return -2; // 데이터베이스 오류
     }
-/*
-    public ArrayList<User> showInfo() {
+
+    public ArrayList<Course> showInfo() {
         String SQL = "SELECT admin_id, name FROM admin WHERE admin_id = ?";
-        ArrayList<User> adminList = new ArrayList<User>();
+        ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, );
             rs = pstmt.executeQuery();
 
             while(rs.next()) {
-                User user = new User();
-                user.setUserID(rs.getString("admin_id"));
-                user.setUserPassword(rs.getString("password"));
-                user.setUserName(rs.getString("name"));
-                adminList.add(user);
+                Course course = new Course();
+                course.setClassID(rs.getString("class_id"));
+                course.setCourseID(rs.getString("course_id"));
+                course.setName(rs.getString("name"));
+                classList.add(course);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return adminList;
+        return classList;
     }*/
 }

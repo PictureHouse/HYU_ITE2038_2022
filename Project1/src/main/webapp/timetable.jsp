@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>학생-수강 편람</title>
+    <title>학생-수업시간표</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
         a {
@@ -32,10 +32,10 @@
         </div>
         <nav>
             <ul id="top-menu">
-                <li><a href="studentMain.jsp" style="color: dodgerblue">수강 편람</a></li>
+                <li><a href="studentMain.jsp">수강 편람</a></li>
                 <li><a href="wishlist.jsp">희망 수업 목록</a></li>
                 <li><a href="enrolment.jsp">수강 신청 과목</a></li>
-                <li><a href="timetable.jsp">수업시간표</a></li>
+                <li><a href="timetable.jsp" style="color: dodgerblue">수업시간표</a></li>
                 <li><a href="logoutAction.jsp">로그아웃</a></li>
             </ul>
         </nav>
