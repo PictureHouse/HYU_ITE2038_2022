@@ -1,7 +1,7 @@
 package Project1;
 
 public class Course {
-    private String ClassID;
+    private String ClassNo;
     private String CourseID;
     private String Name;
     private String LecturerName;
@@ -11,11 +11,11 @@ public class Course {
     private String Building;
     private String Room;
 
-    public String getClassID() {
-        return ClassID;
+    public String getClassNo() {
+        return ClassNo;
     }
 
-    public void setClassID(String classID) { ClassID = classID; }
+    public void setClassNo(String classNo) { ClassNo = classNo; }
 
     public String getCourseID() {
         return CourseID;

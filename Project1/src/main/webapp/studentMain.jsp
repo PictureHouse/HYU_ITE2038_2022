@@ -2,6 +2,7 @@
 <%@ page import="Project1.Course" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <html>
 <head>
     <title>학생-수강 편람</title>
@@ -69,7 +70,7 @@
                 <td><h3 style="display: inline; color: darkblue; margin: 70px">수업번호로 강의 검색</h3></td>
                 <td>
                     <form class="search" style="display: inline; margin-right: 50px"; method="post"; action="studentMain.jsp">
-                        <input type="text" class="form-control" placeholder="수업번호 전체입력" name="classID" maxlength="20">
+                        <input type="text" class="form-control" placeholder="수업번호 전체입력" name="classNo" maxlength="20">
                         <input type="submit" class="button" value="검색">
                     </form>
                 </td>
@@ -87,7 +88,7 @@
                 <td><h3 style="display: inline; color: darkblue; margin: 70px">교과목명으로 강의 검색</h3></td>
                 <td>
                     <form class="search" style="display: inline; margin-right: 50px"; method="post"; action="studentMain.jsp">
-                        <input type="text" class="form-control" placeholder="키워드 입력 가능" name="className" maxlength="20">
+                        <input type="text" class="form-control" placeholder="키워드 입력 가능" name="name" maxlength="30">
                         <input type="submit" class="button" value="검색">
                     </form>
                 </td>
@@ -117,14 +118,14 @@
                     try {
                         ClassList classList = new ClassList();
                         ArrayList<Course> list;
-                        if (request.getParameter("classID") != null) {
-                            int param1 = Integer.valueOf(request.getParameter("classID"));
+                        if (request.getParameter("classNo") != null) {
+                            int param1 = Integer.valueOf(request.getParameter("classNo"));
                             list = classList.search1(param1);
                         } else if (request.getParameter("courseID") != null) {
                             String param2 = request.getParameter("courseID");
                             list = classList.search2(param2);
-                        } else if (request.getParameter("className") != null) {
-                            String param3 = request.getParameter("className");
+                        } else if (request.getParameter("name") != null) {
+                            String param3 = request.getParameter("name");
                             list = classList.search3(param3);
                         } else {
                             list = classList.search2("");
@@ -134,7 +135,7 @@
                 <tr>
                     <td><input type="submit" class="button" value="추가"></td>
                     <td><input type="submit" class="button" value="신청"></td>
-                    <td><%= list.get(i).getClassID()%></td>
+                    <td><%= list.get(i).getClassNo()%></td>
                     <td><%= list.get(i).getCourseID()%></td>
                     <td><%= list.get(i).getName()%></td>
                     <td><%= list.get(i).getLecturerName()%></td>
@@ -155,7 +156,7 @@
         </div>
     </div>
 </body>
-<footer style="position : fixed; bottom: 0; width: 100%">
+<footer style="position : fixed; bottom: 0; width: 100%; background-color: white">
     <h5 style="color: darkblue; text-align: center"><%="Cho Yune / 2022 Fall Semester - Database System"%></h5>
 </footer>
 </html>

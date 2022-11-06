@@ -24,16 +24,16 @@ public class ClassList {
         }
     }
 
-    public ArrayList search1(int classID) {
-        String SQL1 = "SELECT class_id, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class_id = ?";
+    public ArrayList search1(int classNo) {
+        String SQL1 = "SELECT class_no, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class_no = ?";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL1);
-            pstmt.setInt(1, classID);
+            pstmt.setInt(1, classNo);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Course course = new Course();
-                course.setClassID(rs.getString("class_id"));
+                course.setClassNo(rs.getString("class_no"));
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
                 course.setLecturerName(rs.getString("lecturer.name"));
@@ -51,7 +51,7 @@ public class ClassList {
     }
 
     public ArrayList search2(String courseID) {
-        String SQL2 = "SELECT class_id, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE course_id = ?";
+        String SQL2 = "SELECT class_no, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE course_id = ?";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL2);
@@ -59,7 +59,7 @@ public class ClassList {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Course course = new Course();
-                course.setClassID(rs.getString("class_id"));
+                course.setClassNo(rs.getString("class_no"));
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
                 course.setLecturerName(rs.getString("lecturer.name"));
@@ -76,16 +76,16 @@ public class ClassList {
         return classList;
     }
 
-    public ArrayList search3(String className) {
-        String SQL3 = "SELECT class_id, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class.name like %?%";
+    public ArrayList search3(String name) {
+        String SQL3 = "SELECT class_no, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class.name like ?";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL3);
-            pstmt.setString(1, className);
+            pstmt.setString(1, '%'+name+'%');
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Course course = new Course();
-                course.setClassID(rs.getString("class_id"));
+                course.setClassNo(rs.getString("class_no"));
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
                 course.setLecturerName(rs.getString("lecturer.name"));

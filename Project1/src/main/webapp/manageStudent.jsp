@@ -47,7 +47,7 @@
         <img src="images/error.jpg" alt="서비스 불가" style="width: 70%">
     </div>
 </body>
-<footer style="position : fixed; bottom: 0; width: 100%">
+<footer style="position : fixed; bottom: 0; width: 100%; background-color: white">
     <h5 style="color: darkblue; text-align: center"><%="Cho Yune / 2022 Fall Semester - Database System"%></h5>
 </footer>
 </html>
