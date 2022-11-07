@@ -67,7 +67,7 @@
         </nav>
     </div>
 </header>
-<body>
+<body style="margin-bottom: 60px">
     <div class="frame">
         <table>
             <tr>
@@ -104,12 +104,11 @@
             <table>
                 <thead>
                 <tr>
-                    <th>희망수업</th>
-                    <th>수강신청</th>
                     <th>수업번호</th>
                     <th>학수번호</th>
                     <th>교과목명</th>
                     <th>교강사명</th>
+                    <th>요일</th>
                     <th>시작시간</th>
                     <th>종료시간</th>
                     <th>수강정원</th>
@@ -137,12 +136,11 @@
                         for(int i = 0; i < list.size(); i++) {
                 %>
                 <tr>
-                    <td><input type="submit" class="button" value="추가"></td>
-                    <td><input type="submit" class="button" value="신청"></td>
                     <td><%= list.get(i).getClassNo()%></td>
                     <td><%= list.get(i).getCourseID()%></td>
                     <td><%= list.get(i).getName()%></td>
                     <td><%= list.get(i).getLecturerName()%></td>
+                    <td><%= list.get(i).getDay()%></td>
                     <td><%= list.get(i).getBegin()%></td>
                     <td><%= list.get(i).getEnd()%></td>
                     <td><%= list.get(i).getMaxPerson()%></td>

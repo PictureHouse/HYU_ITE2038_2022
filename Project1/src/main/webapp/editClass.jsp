@@ -66,7 +66,7 @@
         </nav>
     </div>
 </header>
-<body>
+<body style="margin-bottom: 60px">
     <div class="frame">
         <form>
             <table>

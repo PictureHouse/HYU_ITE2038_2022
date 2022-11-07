@@ -37,6 +37,7 @@ public class ClassList {
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
                 course.setLecturerName(rs.getString("lecturer.name"));
+                course.setDay(rs.getString("begin"));
                 course.setBegin(rs.getString("begin"));
                 course.setEnd(rs.getString("end"));
                 course.setMaxPerson(rs.getInt("person_max"));
@@ -63,6 +64,7 @@ public class ClassList {
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
                 course.setLecturerName(rs.getString("lecturer.name"));
+                course.setDay(rs.getString("begin"));
                 course.setBegin(rs.getString("begin"));
                 course.setEnd(rs.getString("end"));
                 course.setMaxPerson(rs.getInt("person_max"));
@@ -77,7 +79,7 @@ public class ClassList {
     }
 
     public ArrayList search3(String name) {
-        String SQL3 = "SELECT class_no, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class.name like ?";
+        String SQL3 = "SELECT class_no, course_id, class.name, lecturer.name, time.begin, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class.name like ?";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL3);
@@ -89,11 +91,31 @@ public class ClassList {
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
                 course.setLecturerName(rs.getString("lecturer.name"));
+                course.setDay(rs.getString("begin"));
                 course.setBegin(rs.getString("begin"));
                 course.setEnd(rs.getString("end"));
                 course.setMaxPerson(rs.getInt("person_max"));
                 course.setBuilding(rs.getString("building.name"));
                 course.setRoom(rs.getString("room_id"));
+                classList.add(course);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return classList;
+    }
+
+    public ArrayList olap() {
+        String SQL4 = "SELECT course_id, name, (SELECT avg(point) FROM (credits natural join grades) natural join course) - avg(point) AS difference FROM (credits natural join grades) natural join course GROUP BY course_id HAVING (SELECT avg(point) FROM (credits natural join grades) natural join course) - avg(point) ORDER BY difference DESC limit 10";
+        ArrayList<Course> classList = new ArrayList<Course>();
+        try {
+            pstmt = conn.prepareStatement(SQL4);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Course course = new Course();
+                course.setCourseID(rs.getString("course_id"));
+                course.setName(rs.getString("name"));
+                course.setDifference(rs.getFloat("difference"));
                 classList.add(course);
             }
         } catch (Exception e) {

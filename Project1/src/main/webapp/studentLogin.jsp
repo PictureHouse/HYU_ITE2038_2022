@@ -7,12 +7,12 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
         #container {
-            margin: 180px;
+            margin: 0 auto;
             text-align: center;
         }
     </style>
 </head>
-<body>
+<body style="margin-bottom: 60px">
     <div id="container">
         <form method="post" action="studentLoginAction.jsp">
             <img src="images/HYU_main.png" width="360px" style="margin: 20px;" alt="한양대학교 로고" onclick="location.href='index.jsp'">

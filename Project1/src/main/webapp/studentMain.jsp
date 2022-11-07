@@ -63,7 +63,7 @@
         </nav>
     </div>
 </header>
-<body>
+<body style="margin-bottom: 60px">
     <div class="frame">
         <table>
             <tr>
@@ -106,6 +106,7 @@
                     <th>학수번호</th>
                     <th>교과목명</th>
                     <th>교강사명</th>
+                    <th>요일</th>
                     <th>시작시간</th>
                     <th>종료시간</th>
                     <th>수강정원</th>
@@ -139,6 +140,7 @@
                     <td><%= list.get(i).getCourseID()%></td>
                     <td><%= list.get(i).getName()%></td>
                     <td><%= list.get(i).getLecturerName()%></td>
+                    <td><%= list.get(i).getDay()%></td>
                     <td><%= list.get(i).getBegin()%></td>
                     <td><%= list.get(i).getEnd()%></td>
                     <td><%= list.get(i).getMaxPerson()%></td>

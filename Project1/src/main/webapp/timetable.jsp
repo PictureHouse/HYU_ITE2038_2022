@@ -41,7 +41,7 @@
         </nav>
     </div>
 </header>
-<body>
+<body style="margin-bottom: 60px">
     <div style="text-align: center">
         <img src="images/error.jpg" alt="서비스 불가" style="width: 70%">
     </div>

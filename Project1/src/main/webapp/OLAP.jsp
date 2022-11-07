@@ -1,3 +1,6 @@
+<%@ page import="Project1.ClassList" %>
+<%@ page import="Project1.Course" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,6 +26,25 @@
             margin-left: 20px;
             margin-right: 20px;
         }
+        .frame {
+            font-family: 'Jua', sans-serif;
+            border: 1px solid darkblue;
+            text-align: center;
+            margin-left: 200px;
+            margin-right: 200px;
+            padding: 20px;
+        }
+        table {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        th, td {
+            padding: 5px;
+        }
+        th {
+            color: darkblue;
+        }
     </style>
 </head>
 <header>
@@ -42,9 +64,39 @@
         </nav>
     </div>
 </header>
-<body>
-    <div style="text-align: center">
-        <img src="images/error.jpg" alt="서비스 불가" style="width: 70%">
+<body style="margin-bottom: 60px">
+    <div class="frame">
+        <div class="row">
+            <h2 style="color: darkblue">평점 평균과 특정 과목의 학점 간 차이가 가장 큰 TOP10 과목</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>학수번호</th>
+                    <th>교과목명</th>
+                    <th>평점평균-과목학점</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                    try {
+                        ClassList classList = new ClassList();
+                        ArrayList<Course> list = classList.olap();
+                        for(int i = 0; i < list.size(); i++) {
+                %>
+                <tr>
+                    <td><%= list.get(i).getCourseID()%></td>
+                    <td><%= list.get(i).getName()%></td>
+                    <td><%= list.get(i).getDifference()%></td>
+                </tr>
+                <%
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                %>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 <footer style="position : fixed; bottom: 0; width: 100%; background-color: white">
