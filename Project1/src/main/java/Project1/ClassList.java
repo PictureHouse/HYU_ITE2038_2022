@@ -156,22 +156,22 @@ public class ClassList {
     매개변수로 받은 강좌의 정보들을 쿼리문에 순서대로 set한 후 insert 쿼리문을 수행
     insert에 성공하면 1을 리턴, 중간에 예외상황 발생시 0을 리턴
      */
-    public int insert(int classID, int classNO, String courseID, String className, int majorID, int year, int credit, int lecturerID, int personMax, int opened, int roomID) {
+    public int insert(String classID, String classNO, String courseID, String className, String majorID, String year, String credit, String lecturerID, String personMax, String opened, String roomID) {
         String SQL = "INSERT INTO class VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, classID);
-            pstmt.setInt(2, classNO);
+            pstmt.setInt(1, Integer.parseInt(classID));
+            pstmt.setInt(2, Integer.parseInt(classNO));
             pstmt.setString(3, courseID);
             pstmt.setString(4, className);
-            pstmt.setInt(5, majorID);
-            pstmt.setInt(6, year);
-            pstmt.setInt(7, credit);
-            pstmt.setInt(8, lecturerID);
-            pstmt.setInt(9, personMax);
-            pstmt.setInt(10, opened);
-            pstmt.setInt(11, roomID);
-            rs = pstmt.executeQuery();
+            pstmt.setInt(5, Integer.parseInt(majorID));
+            pstmt.setInt(6, Integer.parseInt(year));
+            pstmt.setInt(7, Integer.parseInt(credit));
+            pstmt.setInt(8, Integer.parseInt(lecturerID));
+            pstmt.setInt(9, Integer.parseInt(personMax));
+            pstmt.setInt(10, Integer.parseInt(opened));
+            pstmt.setInt(11, Integer.parseInt(roomID));
+            pstmt.executeUpdate();
             return 1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,12 +184,12 @@ public class ClassList {
     매개변수로 받은 삭제할 강좌의 ID를 쿼리문에 set한 후 delete 쿼리문을 수행
     delete에 성공하면 1을 리턴, 중간에 예외상황 발생시 0을 리턴
      */
-    public int delete(int classID) {
+    public int delete(String classID) {
         String SQL = "DELETE FROM class WHERE class_id = ?";
         try {
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, classID);
-            rs = pstmt.executeQuery();
+            pstmt.setInt(1, Integer.parseInt(classID));
+            pstmt.executeUpdate();
             return 1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -230,7 +230,7 @@ public class ClassList {
     쿼리문의 결과는 순서대로 돌면서 ArrayList 타입의 classList에 넣고 method가 모두 수행되면 classList를 리턴
      */
     public ArrayList wishlist() {
-        String SQL = "SELECT class_no, course_id, class_name, lecturer_name, day, begin, end, person_max, builing_name, room_id FROM wishlist";
+        String SQL = "SELECT class_no, course_id, class_name, lecturer_name, day, begin, end, person_max, building_name, room_id FROM wishlist";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL);
@@ -241,9 +241,9 @@ public class ClassList {
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class_name"));
                 course.setLecturerName(rs.getString("lecturer_name"));
-                course.setDay(rs.getString("day"));
-                course.setBegin(rs.getString("begin"));
-                course.setEnd(rs.getString("end"));
+                course.setDay(rs.getString("wishlist.day"));
+                course.setBegin(rs.getString("wishlist.begin"));
+                course.setEnd(rs.getString("wishlist.end"));
                 course.setMaxPerson(Integer.parseInt(rs.getString("person_max")));
                 course.setBuilding(rs.getString("building_name"));
                 course.setRoom(rs.getString("room_id"));
@@ -288,7 +288,7 @@ public class ClassList {
     쿼리문의 결과는 순서대로 돌면서 ArrayList 타입의 classList에 넣고 method가 모두 수행되면 classList를 리턴
      */
     public ArrayList enrolment() {
-        String SQL = "SELECT class_no, course_id, class_name, lecturer_name, day, begin, end, person_max, builing_name, room_id FROM enrolment";
+        String SQL = "SELECT class_no, course_id, class_name, lecturer_name, day, begin, end, person_max, building_name, room_id FROM enrolment";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL);

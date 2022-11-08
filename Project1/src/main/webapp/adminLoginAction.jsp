@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="Project1.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="Project1.AdminDAO" %>
 <% request.setCharacterEncoding("UTF-8"); %>

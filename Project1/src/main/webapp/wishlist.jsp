@@ -2,9 +2,11 @@
 <%@ page import="Project1.Course" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <html>
 <head>
     <title>학생-희망 수업 목록</title>
+    <link rel="stylesheet" href="css/button.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
         a {
@@ -115,10 +117,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <div style="text-align: center">
-        <img src="images/error.jpg" alt="서비스 불가" style="width: 70%">
     </div>
 </body>
 <footer style="position : fixed; bottom: 0; width: 100%; background-color: white">

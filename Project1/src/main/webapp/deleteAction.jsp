@@ -12,7 +12,7 @@
 <body>
 <%
   try {
-    int classID = Integer.valueOf(request.getParameter("classID"));
+    String classID = request.getParameter("classID");
 
     ClassList classList = new ClassList();
 

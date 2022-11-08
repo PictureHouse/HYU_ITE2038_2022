@@ -118,7 +118,7 @@
             <table>
                 <tr>
                     <th><h3>수업ID</h3></th>
-                    <td><input type="text" class="form-control" placeholder="수업ID" name="classID" maxlength="5"></td>
+                    <td><input type="text" class="form-control" placeholder="수업ID" name="classID" maxlength="6"></td>
                 </tr>
             </table>
             <input type="submit" class="button" value="삭제" style="text-align: center">

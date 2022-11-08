@@ -12,17 +12,17 @@
 <body>
 <%
   try {
-    int classID = Integer.valueOf(request.getParameter("classID"));
-    int classNO = Integer.valueOf(request.getParameter("classNO"));
+    String classID = request.getParameter("classID");
+    String classNO = request.getParameter("classNO");
     String courseID = request.getParameter("courseID");
     String className = request.getParameter("className");
-    int majorID = Integer.valueOf(request.getParameter("majorID"));
-    int year = Integer.valueOf(request.getParameter("year"));
-    int credit = Integer.valueOf(request.getParameter("credit"));
-    int lecturerID = Integer.valueOf(request.getParameter("lecturerID"));
-    int personMax = Integer.valueOf(request.getParameter("personMax"));
-    int opened = Integer.valueOf(request.getParameter("opened"));
-    int roomID = Integer.valueOf(request.getParameter("roomID"));
+    String majorID = request.getParameter("majorID");
+    String year = request.getParameter("year");
+    String credit = request.getParameter("credit");
+    String lecturerID = request.getParameter("lecturerID");
+    String personMax = request.getParameter("personMax");
+    String opened = request.getParameter("opened");
+    String roomID = request.getParameter("roomID");
 
     ClassList classList = new ClassList();
 

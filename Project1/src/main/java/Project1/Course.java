@@ -36,38 +36,54 @@ public class Course {
     public String getDay() { return Day; }
 
     public void setDay(String time) {
-        String tmp = time.substring(9, 10);
-        switch (tmp) {
-            case "1":
-                Day = "월요일";
-                break;
-            case "2":
-                Day = "화요일";
-                break;
-            case "3":
-                Day = "수요일";
-                break;
-            case "4":
-                Day = "목요일";
-                break;
-            case "5":
-                Day = "금요일";
-                break;
-            case "6":
-                Day = "토요일";
-                break;
-            default:
-                Day = "";
+        if (time.length() < 7) {
+            Day = time;
+        } else {
+            String tmp = time.substring(9, 10);
+            switch (tmp) {
+                case "1":
+                    Day = "월요일";
+                    break;
+                case "2":
+                    Day = "화요일";
+                    break;
+                case "3":
+                    Day = "수요일";
+                    break;
+                case "4":
+                    Day = "목요일";
+                    break;
+                case "5":
+                    Day = "금요일";
+                    break;
+                case "6":
+                    Day = "토요일";
+                    break;
+                default:
+                    Day = "";
+            }
         }
     }
 
     public String getBegin() { return Begin; }
 
-    public void setBegin(String begin) { Begin = begin.substring(11, 16); }
+    public void setBegin(String begin) {
+        if (begin.length() < 7) {
+            Begin = begin;
+        } else {
+            Begin = begin.substring(11, 16);
+        }
+    }
 
     public String getEnd() { return End; }
 
-    public void setEnd(String end) { End = end.substring(11, 16); }
+    public void setEnd(String end) {
+        if (end.length() < 7) {
+            End = end;
+        } else {
+            End = end.substring(11, 16);
+        }
+    }
 
     public int getMaxPerson() { return MaxPerson; }
 

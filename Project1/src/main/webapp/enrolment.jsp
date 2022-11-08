@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>학생-수강 신청 과목</title>
+    <link rel="stylesheet" href="css/button.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
         a {
@@ -113,10 +114,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <div style="text-align: center">
-        <img src="images/error.jpg" alt="서비스 불가" style="width: 70%">
     </div>
 </body>
 <footer style="position : fixed; bottom: 0; width: 100%; background-color: white">
