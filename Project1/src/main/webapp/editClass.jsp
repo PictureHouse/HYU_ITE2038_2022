@@ -75,6 +75,7 @@
     <%--개설할 강좌의 정보들을 사용자에게 입력 받아서 insertAction.jsp로 전달하여 DB에 정보 추가를 수행--%>
     <div class="frame">
         <h2 style="color: darkblue">강좌 개설</h2>
+        <h4 style="color: darkblue">항목들을 정확히 모두 입력해주시기 바랍니다.</h4>
         <form method="post"; action="insertAction.jsp">
             <table>
                 <tr>
@@ -114,6 +115,7 @@
     <%--삭제할 강좌의 수업ID를 사용자에게 입력받고 입력 받은 값을 deleteAction.jsp로 값을 전달하여 DB에서 정보 삭제를 수행--%>
     <div class="frame">
         <h2 style="color: darkblue">강좌 삭제</h2>
+        <h4 style="color: darkblue;">항목을 정확히 입력해주시기 바랍니다.</h4>
         <form method="post"; action="deleteAction.jsp">
             <table>
                 <tr>

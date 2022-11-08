@@ -109,6 +109,7 @@
             <table>
                 <thead>
                 <tr>
+                    <th>수업ID</th>
                     <th>수업번호</th>
                     <th>학수번호</th>
                     <th>교과목명</th>
@@ -141,6 +142,7 @@
                         for(int i = 0; i < list.size(); i++) {
                 %>
                 <tr>
+                    <td><%= list.get(i).getClassID()%></td>
                     <td><%= list.get(i).getClassNo()%></td>
                     <td><%= list.get(i).getCourseID()%></td>
                     <td><%= list.get(i).getName()%></td>

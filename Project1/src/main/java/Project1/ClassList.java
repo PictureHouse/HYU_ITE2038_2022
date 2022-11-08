@@ -37,7 +37,7 @@ public class ClassList {
     쿼리문의 결과는 순서대로 돌면서 ArrayList 타입의 classList에 넣고 method가 모두 수행되면 classList를 리턴
      */
     public ArrayList search1(int classNo) {
-        String SQL = "SELECT class_no, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class_no = ?";
+        String SQL = "SELECT class_id, class_no, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class_no = ?";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL);
@@ -45,6 +45,7 @@ public class ClassList {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Course course = new Course();
+                course.setClassID((rs.getString("class_id")));
                 course.setClassNo(rs.getString("class_no"));
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
@@ -69,7 +70,7 @@ public class ClassList {
     쿼리문의 결과는 순서대로 돌면서 ArrayList 타입의 classList에 넣고 method가 모두 수행되면 classList를 리턴
      */
     public ArrayList search2(String courseID) {
-        String SQL = "SELECT class_no, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE course_id = ?";
+        String SQL = "SELECT class_id, class_no, course_id, class.name, lecturer.name, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE course_id = ?";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL);
@@ -77,6 +78,7 @@ public class ClassList {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Course course = new Course();
+                course.setClassID((rs.getString("class_id")));
                 course.setClassNo(rs.getString("class_no"));
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
@@ -101,7 +103,7 @@ public class ClassList {
     쿼리문의 결과는 순서대로 돌면서 ArrayList 타입의 classList에 넣고 method가 모두 수행되면 classList를 리턴
      */
     public ArrayList search3(String name) {
-        String SQL = "SELECT class_no, course_id, class.name, lecturer.name, time.begin, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class.name like ?";
+        String SQL = "SELECT class_id, class_no, course_id, class.name, lecturer.name, time.begin, time.begin, time.end, person_max, building.name, room_id FROM ((class join lecturer using (lecturer_id)) natural join room natural join time) join building using (building_id) WHERE class.name like ?";
         ArrayList<Course> classList = new ArrayList<Course>();
         try {
             pstmt = conn.prepareStatement(SQL);
@@ -109,6 +111,7 @@ public class ClassList {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Course course = new Course();
+                course.setClassID((rs.getString("class_id")));
                 course.setClassNo(rs.getString("class_no"));
                 course.setCourseID(rs.getString("course_id"));
                 course.setName(rs.getString("class.name"));
@@ -216,7 +219,7 @@ public class ClassList {
             pstmt.setInt(8, personMax);
             pstmt.setString(9, buildingName);
             pstmt.setInt(10, roomID);
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
             return 1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -274,7 +277,7 @@ public class ClassList {
             pstmt.setInt(8, personMax);
             pstmt.setString(9, buildingName);
             pstmt.setInt(10, roomID);
-            rs = pstmt.executeQuery();
+            pstmt.executeUpdate();
             return 1;
         } catch (Exception e) {
             e.printStackTrace();

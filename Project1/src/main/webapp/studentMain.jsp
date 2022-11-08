@@ -110,6 +110,7 @@
                 <tr>
                     <th>희망수업</th>
                     <th>수강신청</th>
+                    <th>수업ID</th>
                     <th>수업번호</th>
                     <th>학수번호</th>
                     <th>교과목명</th>
@@ -144,6 +145,7 @@
                 <tr>
                     <td><input type="submit" class="button" value="추가"></td>
                     <td><input type="submit" class="button" value="신청"></td>
+                    <td><%= list.get(i).getClassID()%></td>
                     <td><%= list.get(i).getClassNo()%></td>
                     <td><%= list.get(i).getCourseID()%></td>
                     <td><%= list.get(i).getName()%></td>

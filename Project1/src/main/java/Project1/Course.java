@@ -5,10 +5,12 @@ package Project1;
 웹사이트 구동을 할 때 사용되는 과목과 관련된 정보들을 멤버로 가지고, 각각에 대한 get, set method를 가짐
  */
 public class Course {
+    private String ClassID;
     private String ClassNo;
     private String CourseID;
     private String Name;
     private String LecturerName;
+    private String LecturerID;
     private String Day;
     private String Begin;
     private String End;
@@ -16,6 +18,10 @@ public class Course {
     private String Building;
     private String Room;
     private String Difference;
+
+    public String getClassID() { return ClassID; }
+
+    public void setClassID(String classID) { ClassID = classID; }
 
     public String getClassNo() { return ClassNo; }
 
@@ -32,6 +38,10 @@ public class Course {
     public String getLecturerName() { return LecturerName; }
 
     public void setLecturerName(String lecturerName) { LecturerName = lecturerName; }
+
+    public String getLecturerID() { return LecturerID; }
+
+    public void setLecturerID(String lecturerID) { LecturerID= lecturerID; }
 
     public String getDay() { return Day; }
 
