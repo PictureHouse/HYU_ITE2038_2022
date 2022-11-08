@@ -8,9 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
   <title>학생 로그인 액션</title>
 </head>
+<%--studentLogin.jsp로부터 값을 받은 후 login() method를 수행하여 로그인 과정을 수행한 후 login() method의 리턴 값에 따라 해당하는 메시지를 출력한 후 다음 화면으로 이동--%>
 <body>
   <%
     String userID = null;

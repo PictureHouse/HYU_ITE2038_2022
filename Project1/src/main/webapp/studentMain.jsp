@@ -2,6 +2,7 @@
 <%@ page import="Project1.Course" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--교과목명 검색을 수행할 때 한글 인코딩이 되지 않아 검색이 되지 않던 문제를 해결하기 위해 아래와 같은 코드 추가--%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <html>
 <head>
@@ -45,8 +46,12 @@
         th, td {
             padding: 5px;
         }
+        th {
+            color: darkblue;
+        }
     </style>
 </head>
+<%--상단 로고 및 메뉴, 로고를 클릭하면 수강편람 화면으로 이동할 수 있음, 메뉴 중 현재 보고 있는 화면은 글자 색이 하늘색으로 표시되고 커서를 메뉴 위로 가져가면 글자 색이 노란색으로 바뀜--%>
 <header>
     <div>
         <div style="text-align: center">
@@ -63,7 +68,9 @@
         </nav>
     </div>
 </header>
+<%--강의 검색과 강의 목록 출력 부분을 별도의 프레임으로 분리하였음--%>
 <body style="margin-bottom: 60px">
+    <%--강의 검색 입력창으로 사용자의 입력을 받고 넘겨서 검색을 수행, 요소들의 정렬을 위해 테이블을 이용하였음--%>
     <div class="frame">
         <table>
             <tr>
@@ -95,6 +102,7 @@
             </tr>
         </table>
     </div>
+    <%--검색어를 전달받아서 검색 method를 수행하고 그 결과로 리턴 받은 list를 for문을 이용해서 순차적으로 돌면서 테이블에 출력되도록 하였음--%>
     <div class="frame">
         <div class="row">
             <table>

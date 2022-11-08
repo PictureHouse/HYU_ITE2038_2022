@@ -1,5 +1,9 @@
 package Project1;
 
+/*
+과목 관련 정보들을 담는 클래스
+웹사이트 구동을 할 때 사용되는 과목과 관련된 정보들을 멤버로 가지고, 각각에 대한 get, set method를 가짐
+ */
 public class Course {
     private String ClassNo;
     private String CourseID;
@@ -13,35 +17,21 @@ public class Course {
     private String Room;
     private String Difference;
 
-    public String getClassNo() {
-        return ClassNo;
-    }
+    public String getClassNo() { return ClassNo; }
 
     public void setClassNo(String classNo) { ClassNo = classNo; }
 
-    public String getCourseID() {
-        return CourseID;
-    }
+    public String getCourseID() { return CourseID; }
 
-    public void setCourseID(String courseID) {
-        CourseID = courseID;
-    }
+    public void setCourseID(String courseID) { CourseID = courseID; }
 
-    public String getName() {
-        return Name;
-    }
+    public String getName() { return Name; }
 
-    public void setName(String name) {
-        Name = name;
-    }
+    public void setName(String name) { Name = name; }
 
-    public String getLecturerName() {
-        return LecturerName;
-    }
+    public String getLecturerName() { return LecturerName; }
 
-    public void setLecturerName(String lecturerName) {
-        LecturerName = lecturerName;
-    }
+    public void setLecturerName(String lecturerName) { LecturerName = lecturerName; }
 
     public String getDay() { return Day; }
 

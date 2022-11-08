@@ -12,6 +12,7 @@
         }
     </style>
 </head>
+<%--아이디와 비밀번호를 입력한 후 로그인 버튼을 누르면 studentLoginAction.jsp로 값을 전달하여 로그인 과정을 수행--%>
 <body style="margin-bottom: 60px">
     <div id="container">
         <form method="post" action="studentLoginAction.jsp">

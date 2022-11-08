@@ -25,6 +25,7 @@
         }
     </style>
 </head>
+<%--상단 로고 및 메뉴, 로고를 클릭하면 수강편람 화면으로 이동할 수 있음, 메뉴 중 현재 보고 있는 화면은 글자 색이 하늘색으로 표시되고 커서를 메뉴 위로 가져가면 글자 색이 노란색으로 바뀜--%>
 <header>
     <div>
         <div style="text-align: center">
@@ -42,6 +43,7 @@
         </nav>
     </div>
 </header>
+<%--기능 구현을 못했지만 사이트의 원활한 동작 및 UI를 위해 서비스 이용 불가 메시지가 화면에 나타나도록 했음--%>
 <body style="margin-bottom: 60px">
     <div style="text-align: center">
         <img src="images/error.jpg" alt="서비스 불가" style="width: 70%">
