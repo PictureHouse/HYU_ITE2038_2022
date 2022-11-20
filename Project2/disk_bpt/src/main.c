@@ -18,9 +18,9 @@ int main(){
                 if (result) {
                     printf("Key: %ld, Value: %s\n", input, result);
                 }
-                else
+                else {
                     printf("Not Exists\n");
-
+                }
                 fflush(stdout);
                 break;
             case 'd':
@@ -38,6 +38,3 @@ int main(){
     printf("\n");
     return 0;
 }
-
-
-
