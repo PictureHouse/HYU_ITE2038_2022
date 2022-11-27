@@ -1,6 +1,6 @@
 #include "bpt.h"
 
-int num_of_split, num_of_coalesce;
+int num_of_split, num_of_coalesce, num_of_transfer;
 
 int main(){
     int64_t input;
@@ -30,7 +30,7 @@ int main(){
                 db_delete(input);
                 break;
             case 'q':
-            printf("Split : %d\nCoalesce : %d\n", num_of_split, num_of_coalesce);
+                printf("Split : %d\nCoalesce : %d\nTransfer : %d\n", num_of_split, num_of_coalesce, num_of_transfer);
                 while (getchar() != (int)'\n');
                 return EXIT_SUCCESS;
                 break;   
