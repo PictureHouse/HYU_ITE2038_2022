@@ -1,27 +1,24 @@
 #include "bpt.h"
 
 H_P * hp;
-
 page * rt = NULL; //root is declared as global
-
 int fd = -1; //fd is declared as global
 int num_of_split, num_of_coalesce;
 
 H_P * load_header(off_t off) {
     H_P * newhp = (H_P*)calloc(1, sizeof(H_P));
     if (sizeof(H_P) > pread(fd, newhp, sizeof(H_P), 0)) {
-
         return NULL;
     }
     return newhp;
 }
 
-
 page * load_page(off_t off) {
     page* load = (page*)calloc(1, sizeof(page));
-    if (off % sizeof(page) != 0) printf("load fail : page offset error\n");
+    if (off % sizeof(page) != 0) {
+        printf("load fail : page offset error\n");
+    }
     if (sizeof(page) > pread(fd, load, sizeof(page), off)) {
-
         return NULL;
     }
     return load;
@@ -50,7 +47,9 @@ int open_table(char * pathname) {
         rt = load_page(r_o);
         return 0;
     }
-    else return -1;
+    else {
+        return -1;
+    }
 }
 
 void reset(off_t off) {
@@ -134,25 +133,27 @@ off_t find_leaf(int64_t key) {
 
     while (!p->is_leaf) {
         i = 0;
-
         while (i < p->num_of_keys) {
-            if (key >= p->b_f[i].key) i++;
-            else break;
+            if (key >= p->b_f[i].key) {
+                i++;
+            }
+            else {
+                break;
+            }
         }
-        if (i == 0) loc = p->next_offset;
-        else
+        if (i == 0) {
+            loc = p->next_offset;
+        }
+        else {
             loc = p->b_f[i - 1].p_offset;
+        }
         //if (loc == 0)
         // return NULL;
-
         free(p);
         p = load_page(loc);
-
     }
-
     free(p);
     return loc;
-
 }
 
 char * db_find(int64_t key) {
@@ -165,7 +166,9 @@ char * db_find(int64_t key) {
     page * p = load_page(fin);
 
     for (; i < p->num_of_keys; i++) {
-        if (p->records[i].key == key) break;
+        if (p->records[i].key == key) {
+            break;
+        }
     }
     if (i == p->num_of_keys) {
         free(p);
@@ -179,16 +182,15 @@ char * db_find(int64_t key) {
 }
 
 int cut(int length) {
-    if (length % 2 == 0)
+    if (length % 2 == 0) {
         return length / 2;
-    else
+    }
+    else {
         return length / 2 + 1;
+    }
 }
 
-
-
 void start_new_file(record rec) {
-
     page * root;
     off_t ro;
     ro = new_page();
@@ -207,7 +209,6 @@ void start_new_file(record rec) {
 }
 
 int db_insert(int64_t key, char * value) {
-
     record nr;
     nr.key = key;
     strcpy(nr.value, value);
@@ -225,7 +226,6 @@ int db_insert(int64_t key, char * value) {
     free(dupcheck);
 
     off_t leaf = find_leaf(key);
-
     page * leafp = load_page(leaf);
 
     if (leafp->num_of_keys < LEAF_MAX) {
@@ -238,13 +238,13 @@ int db_insert(int64_t key, char * value) {
     free(leafp);
     //why double free?
     return 0;
-
 }
 
 off_t insert_into_leaf(off_t leaf, record inst) {
-
     page * p = load_page(leaf);
-    if (p->is_leaf == 0) printf("iil error : it is not leaf page\n");
+    if (p->is_leaf == 0) {
+        printf("iil error : it is not leaf page\n");
+    }
     int i, insertion_point;
     insertion_point = 0;
     while (insertion_point < p->num_of_keys && p->records[insertion_point].key < inst.key) {
@@ -260,7 +260,6 @@ off_t insert_into_leaf(off_t leaf, record inst) {
     free(p);
     return leaf;
 }
-
 
 off_t insert_into_leaf_as(off_t leaf, record inst) {
     off_t new_leaf;
@@ -325,11 +324,9 @@ off_t insert_into_leaf_as(off_t leaf, record inst) {
     printf("split_leaf is complete\n");
 
     return insert_into_parent(leaf, new_key, new_leaf);
-
 }
 
 off_t insert_into_parent(off_t old, int64_t key, off_t newp) {
-
     int left_index;
     off_t bumo;
     page * left;
@@ -338,9 +335,9 @@ off_t insert_into_parent(off_t old, int64_t key, off_t newp) {
     bumo = left->parent_page_offset;
     free(left);
 
-    if (bumo == 0)
+    if (bumo == 0) {
         return insert_into_new_root(old, key, newp);
-
+    }
     left_index = get_left_index(old);
 
     page * parent = load_page(bumo);
@@ -360,9 +357,13 @@ int get_left_index(off_t left) {
     free(child);
     page * parent = load_page(po);
     int i = 0;
-    if (left == parent->next_offset) return -1;
+    if (left == parent->next_offset) {
+        return -1;
+    }
     for (; i < parent->num_of_keys; i++) {
-        if (parent->b_f[i].p_offset == left) break;
+        if (parent->b_f[i].p_offset == left) {
+            break;
+        }
     }
 
     if (i == parent->num_of_keys) {
@@ -374,7 +375,6 @@ int get_left_index(off_t left) {
 }
 
 off_t insert_into_new_root(off_t old, int64_t key, off_t newp) {
-
     off_t new_root;
     new_root = new_page();
     page * nr = load_page(new_root);
@@ -401,11 +401,9 @@ off_t insert_into_new_root(off_t old, int64_t key, off_t newp) {
     free(left);
     free(right);
     return new_root;
-
 }
 
 off_t insert_into_internal(off_t bumo, int left_index, int64_t key, off_t newp) {
-
     page * parent = load_page(bumo);
     int i;
 
@@ -426,7 +424,6 @@ off_t insert_into_internal(off_t bumo, int left_index, int64_t key, off_t newp) 
 }
 
 off_t insert_into_internal_as(off_t bumo, int left_index, int64_t key, off_t newp) {
-
     int i, j, split;
     int64_t k_prime;
     off_t new_p, child;
@@ -437,7 +434,9 @@ off_t insert_into_internal_as(off_t bumo, int left_index, int64_t key, off_t new
     page * old_parent = load_page(bumo);
 
     for (i = 0, j = 0; i < old_parent->num_of_keys; i++, j++) {
-        if (j == left_index + 1) j++;
+        if (j == left_index + 1) {
+            j++;
+        }
         temp[j] = old_parent->b_f[i];
     }
 
@@ -484,7 +483,6 @@ off_t insert_into_internal_as(off_t bumo, int left_index, int64_t key, off_t new
 }
 
 int db_delete(int64_t key) {
-
     if (rt->num_of_keys == 0) {
         printf("root is empty\n");
         return -1;
@@ -499,11 +497,9 @@ int db_delete(int64_t key) {
     off_t deloff = find_leaf(key);
     delete_entry(key, deloff);
     return 0;
-
 }
 
 void delete_entry(int64_t key, off_t deloff) {
-
     remove_entry_from_page(key, deloff);
 
     if (deloff == hp->rpo) {
@@ -530,7 +526,7 @@ void delete_entry(int64_t key, off_t deloff) {
         k_prime = parent->b_f[0].key;
         k_prime_index = 0;
     }
-    else if(parent->b_f[0].p_offset == deloff) {
+    else if (parent->b_f[0].p_offset == deloff) {
         neighbor_index = -1;
         neighbor_offset = parent->next_offset;
         k_prime_index = 0;
@@ -538,9 +534,11 @@ void delete_entry(int64_t key, off_t deloff) {
     }
     else {
         int i;
-
-        for (i = 0; i <= parent->num_of_keys; i++)
-            if (parent->b_f[i].p_offset == deloff) break;
+        for (i = 0; i <= parent->num_of_keys; i++) {
+            if (parent->b_f[i].p_offset == deloff) {
+                break;
+            }
+        }
         neighbor_index = i - 1;
         neighbor_offset = parent->b_f[i - 1].p_offset;
         k_prime_index = i;
@@ -564,22 +562,20 @@ void delete_entry(int64_t key, off_t deloff) {
         redistribute_pages(deloff, neighbor_index, neighbor_offset, parent_offset, k_prime, k_prime_index);
     }
     return;
-
 }
-void redistribute_pages(off_t need_more, int nbor_index, off_t nbor_off, off_t par_off, int64_t k_prime, int k_prime_index) {
-    
+
+void redistribute_pages(off_t need_more, int nbor_index, off_t nbor_off, off_t par_off, int64_t k_prime, int k_prime_index) {    
     page *need, *nbor, *parent;
     int i;
     need = load_page(need_more);
     nbor = load_page(nbor_off);
     parent = load_page(par_off);
     if (nbor_index != -2) {
-        
         if (!need->is_leaf) {
             //printf("redis average interal\n");
-            for (i = need->num_of_keys; i > 0; i--)
+            for (i = need->num_of_keys; i > 0; i--) {
                 need->b_f[i] = need->b_f[i - 1];
-            
+            }
             need->b_f[0].key = k_prime;
             need->b_f[0].p_offset = need->next_offset;
             need->next_offset = nbor->b_f[nbor->num_of_keys - 1].p_offset;
@@ -588,28 +584,25 @@ void redistribute_pages(off_t need_more, int nbor_index, off_t nbor_off, off_t p
             pwrite(fd, child, sizeof(page), need->next_offset);
             free(child);
             parent->b_f[k_prime_index].key = nbor->b_f[nbor->num_of_keys - 1].key;
-            
         }
         else {
             //printf("redis average leaf\n");
-            for (i = need->num_of_keys; i > 0; i--){
+            for (i = need->num_of_keys; i > 0; i--) {
                 need->records[i] = need->records[i - 1];
             }
             need->records[0] = nbor->records[nbor->num_of_keys - 1];
             nbor->records[nbor->num_of_keys - 1].key = 0;
             parent->b_f[k_prime_index].key = need->records[0].key;
         }
-
     }
     else {
         if (need->is_leaf) {
             //printf("redis leftmost leaf\n");
             need->records[need->num_of_keys] = nbor->records[0];
-            for (i = 0; i < nbor->num_of_keys - 1; i++)
+            for (i = 0; i < nbor->num_of_keys - 1; i++) {
                 nbor->records[i] = nbor->records[i + 1];
+            }
             parent->b_f[k_prime_index].key = nbor->records[0].key;
-            
-           
         }
         else {
             //printf("redis leftmost internal\n");
@@ -622,9 +615,9 @@ void redistribute_pages(off_t need_more, int nbor_index, off_t nbor_off, off_t p
             
             parent->b_f[k_prime_index].key = nbor->b_f[0].key;
             nbor->next_offset = nbor->b_f[0].p_offset;
-            for (i = 0; i < nbor->num_of_keys - 1 ; i++)
+            for (i = 0; i < nbor->num_of_keys - 1 ; i++) {
                 nbor->b_f[i] = nbor->b_f[i + 1];
-            
+            }
         }
     }
     nbor->num_of_keys--;
@@ -637,7 +630,6 @@ void redistribute_pages(off_t need_more, int nbor_index, off_t nbor_off, off_t p
 }
 
 void coalesce_pages(off_t will_be_coal, int nbor_index, off_t nbor_off, off_t par_off, int64_t k_prime) {
-    
     page *wbc, *nbor, *parent;
     off_t newp, wbf;
 
@@ -672,13 +664,11 @@ void coalesce_pages(off_t will_be_coal, int nbor_index, off_t nbor_off, off_t pa
             pwrite(fd, child, sizeof(page), nbor->b_f[i].p_offset);
             free(child);
         }
-
     }
     else {
         //printf("coal leaf\n");
         int range = wbc->num_of_keys;
-        for (i = point, j = 0; j < range; i++, j++) {
-            
+        for (i = point, j = 0; j < range; i++, j++) {   
             nbor->records[i] = wbc->records[j];
             nbor->num_of_keys++;
             wbc->num_of_keys--;
@@ -694,13 +684,12 @@ void coalesce_pages(off_t will_be_coal, int nbor_index, off_t nbor_off, off_t pa
     free(parent);
     num_of_coalesce++;
     return;
-
 }
 
 void adjust_root(off_t deloff) {
-
-    if (rt->num_of_keys > 0)
+    if (rt->num_of_keys > 0) {
         return;
+    }
     if (!rt->is_leaf) {
         off_t nr = rt->next_offset;
         page * nroot = load_page(nr);
@@ -731,16 +720,16 @@ void adjust_root(off_t deloff) {
 }
 
 void remove_entry_from_page(int64_t key, off_t deloff) {
-    
     int i = 0;
     page * lp = load_page(deloff);
     if (lp->is_leaf) {
         printf("remove leaf key %ld\n", key);
-        while (lp->records[i].key != key)
+        while (lp->records[i].key != key) {
             i++;
-
-        for (++i; i < lp->num_of_keys; i++)
+        }
+        for (++i; i < lp->num_of_keys; i++) {
             lp->records[i - 1] = lp->records[i];
+        }
         lp->num_of_keys--;
         pwrite(fd, lp, sizeof(page), deloff);
         if (deloff == hp->rpo) {
@@ -755,10 +744,12 @@ void remove_entry_from_page(int64_t key, off_t deloff) {
     }
     else {
         printf("remove interanl key %ld\n", key);
-        while (lp->b_f[i].key != key)
+        while (lp->b_f[i].key != key) {
             i++;
-        for (++i; i < lp->num_of_keys; i++)
+        }
+        for (++i; i < lp->num_of_keys; i++) {
             lp->b_f[i - 1] = lp->b_f[i];
+        }
         lp->num_of_keys--;
         pwrite(fd, lp, sizeof(page), deloff);
         if (deloff == hp->rpo) {
@@ -766,16 +757,9 @@ void remove_entry_from_page(int64_t key, off_t deloff) {
             free(rt);
             rt = load_page(deloff);
             return;
-        }
-        
+        }   
         free(lp);
         return;
-    }
-    
+    }    
 }
-
-
-
-
-
 
