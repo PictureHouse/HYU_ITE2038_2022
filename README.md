@@ -9,6 +9,6 @@
 
 - [Assignment2 - Join Algorithm](https://github.com/PictureHouse/HYU_ITE2038_2022/tree/main/Assignment2)
 
-- [Project1 - Web Application Development(Class Enrolment Homepage)](https://github.com/PictureHouse/HYU_ITE2038_2022/tree/main/Project1)
+- [Project1 - Web Application Development(Class Enrollment Homepage)](https://github.com/PictureHouse/HYU_ITE2038_2022/tree/main/Project1)
 
 - [Project2 - B+tree Performance Improvement](https://github.com/PictureHouse/HYU_ITE2038_2022/tree/main/Project2)
